@@ -31,7 +31,9 @@ const login = (req, res) => {
   axios(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
     method: 'POST',
     headers: {
-      'content-type': 'application/json'
+      // 'content-type': 'application/json'
+      // needed to change headers content b/c of this https://bobbyhadz.com/blog/javascript-axioserror-unexpected-end-of-file#:~:text=The%20%22AxiosError%3A%20unexpected%20end%20of,back%20to%20axios%20version%201.1.
+        'Accept-Encoding': 'gzip,deflate,compress'
     },
     data: {
       grant_type: 'password',
