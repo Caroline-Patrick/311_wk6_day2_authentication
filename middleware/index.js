@@ -2,9 +2,13 @@ const jwksRsa = require('jwks-rsa');
 // const jwt = require('express-jwt');
 var { expressjwt:jwt } = require("express-jwt");
 
-const logger = () => {}
+const logger = (req, res, next) => {
+  console.log(`Logging route: ${req.path} made at: ${new Date().toISOString()}`)
+  next()
+}
 
 const checkJwt = jwt({
+  
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
@@ -16,6 +20,8 @@ const checkJwt = jwt({
   issuer: `https://${process.env.AUTH0_DOMAIN}/`,
   algorithms: ['RS256']
 });
+
+
 
 module.exports = {
   logger,

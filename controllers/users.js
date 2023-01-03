@@ -25,7 +25,7 @@ const createUser = (req, res) => {
   sql = mysql.format(sql, [ firstName, lastName ])
 
   pool.query(sql, (err, results) => {
-    if (err) return 'yes' + handleSQLError(res, err)
+    if (err) return handleSQLError(res, err)
     return res.json({ newId: results.insertId });
   })
 }
